@@ -12,3 +12,4 @@ public/bundle.js.map
 npm-debug.log
 
 .vscode
+sendgrid.env

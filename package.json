@@ -1,7 +1,7 @@
 {
   "name": "voice-connect",
   "version": "0.0.1",
-  "description": "A happy little skeleton.",
+  "description": "A web app that allows the user to anonymously record and send modularized audio messages via an integrated email client",
   "main": "index.js",
   "scripts": {
     "validate": "check-node-version --node '>= 6.7.0'",
@@ -64,6 +64,7 @@
     "redux-devtools-extension": "^2.13.0",
     "redux-logger": "^2.7.0",
     "redux-thunk": "^2.1.0",
+    "sendgrid": "^4.7.1",
     "sequelize": "^3.24.6",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0"
