@@ -1,5 +1,3 @@
-//const RecordRTC = require('recordrtc');
-
 var constraints = {
   audio: true,
   video: false
