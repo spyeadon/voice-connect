@@ -8,6 +8,9 @@ import store from './store'
 import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
+import Record from './components/recorder.jsx';
+
+import recordRTCScript from './recordRTC.js';
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -15,8 +18,9 @@ const ExampleApp = connect(
   ({ user, children }) =>
     <div>
       <nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav> 
+        {//user ? <WhoAmI/> : <Login/>}
+        }
+      </nav>
       {children}
     </div>
 )
@@ -27,6 +31,7 @@ render (
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/jokes" />
         <Route path="/jokes" component={Jokes} />
+        <Route path="/record" component={Record} />
       </Route>
     </Router>
   </Provider>,
