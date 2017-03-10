@@ -10,7 +10,7 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import Record from './components/recorder.jsx';
 
-import recordRTCScript from './recordRTC.js';
+import webAPIScript from './webAPI-Mic.js';
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
