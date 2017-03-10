@@ -1,31 +1,26 @@
-const RecordRTC = require('recordrtc');
+//const RecordRTC = require('recordrtc');
 
-var session = {
+var constraints = {
   audio: true,
   video: false
 };
 
-var recordRTC = null;
+//function recording(mediaStream = new MediaStream()) {
+function recording(mediaStream) {
+  var audio = document.getElementById('audioNode');
+  audio.srcObject = mediaStream;
+  // audio.onloadedmetadata = function(event) {
+  //   audio.play();
+  //  };
 
-function stopCallback(audioURL) {
-  //audio.src = audioURL;
-
-  var recordedBlob = recordRTC.getBlob();
-  recordRTC.getDataURL(function(dataURL) { });
 }
 
 
-export function recording(mediaStream = new MediaStream()) {
-  var audioContext = window.AudioContext;
-  var context = new audioContext();
-  var audioInput = context.createMediaStreamSource(mediaStream)
-
-  console.log("is it still recorindg?: ", mediaStream.active);
-
-  recordRTC = RecordRTC(mediaStream, {type: 'audio'});
-  recordRTC.startRecording();
-  recordRTC.stopRecording(stopCallback);
+function error (err) {
+  console.error(err);
 }
 
 
-navigator.getUserMedia(session, recording, console.error)
+navigator.mediaDevices.getUserMedia(constraints)
+.then(recording)
+.catch(error);

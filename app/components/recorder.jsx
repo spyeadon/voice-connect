@@ -12,7 +12,7 @@ const Record = () => {
 
   return (
     <div>
-    <audio> </audio>
+    <audio id="audioNode"> </audio>
 
     <button onClick={startClick} id="btn-start-recording">Start Recording</button>
     <button onClick={stopClick} id="btn-stop-recording" disabled="">Stop Recording</button>
