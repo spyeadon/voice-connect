@@ -7,9 +7,9 @@ var constraints = {
 function recording(mediaStream) {
   var audio = document.getElementById('audioNode');
   audio.srcObject = mediaStream;
-  // audio.onloadedmetadata = function(event) {
-  //   audio.play();
-  //  };
+  audio.onloadedmetadata = function(event) {
+    audio.play();
+   };
 
 }
 

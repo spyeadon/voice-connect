@@ -8,10 +8,12 @@ module.exports = require('express').Router()
   let to_email = new helper.Email('spyeadon@gmail.com');
   let subject = "SendGrid voice-connect test email2";
   // let content = new helper.Content("text/plain", "Test of audio file attachment");
-  let contentFILE = req.body.audio.slice(5);
-  let content = new helper.Content("audio/mp3", contentFILE, "file-name.mp3");
+  let contentFILE = {buffer: req.body.toString('hex')};
+  let content = new helper.Content("application/octet-stream", contentFILE);
 
   let mail = new helper.Mail(from_email, subject, to_email, content);
+  console.log("mail obj contents: ", mail.getContents());
+  console.log("mail obj JSON: ", mail.toJSON());
 
   // mail.addAttachment({
   //   filename: 'recording-test.wav',
@@ -26,7 +28,7 @@ module.exports = require('express').Router()
   // attachment.setDisposition('attachment');
   // mail.addAttachment(attachment);
 
-  console.log("axios req body is: ", contentFILE);
+  //console.log("axios req body is: ", contentFILE);
 
   const request = sg.emptyRequest({
     method: 'POST',
@@ -42,7 +44,7 @@ module.exports = require('express').Router()
       // console.log("res headers: ", response.headers)
     })
     .catch(error => {
-      console.log("Hey Soren! API err is: ", error.response.statusCode);
+      console.log("Hey Soren! API err is: ", error.response.body);
     });
 })
 .get('/', (req, res, next) => {
@@ -50,7 +52,7 @@ module.exports = require('express').Router()
   let from_email = new helper.Email('example@sendgrid.net');
   let to_email = new helper.Email('spyeadon@gmail.com');
   let subject = "SendGrid voice-connect test email";
-  let content = new helper.Content("text/plain", "Test of audio file attachment");
+  let content = new helper.Content("application/octet-stream", "Test of audio file attachment");
 
   let mail = new helper.Mail(from_email, subject, to_email, content);
 

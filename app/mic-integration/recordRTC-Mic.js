@@ -25,14 +25,15 @@ function recording (mediaStream) {
 stopButton.onclick = function () {
     recordRTC.stopRecording(function (audioWebMURL) {
         audio.src = audioWebMURL;
-        //recordRTC.getDataURL(function(dataURL) { });
         console.log("recordRTC is: ", recordRTC);
 
         let recordedBlob = recordRTC.getBlob();
         let formData = new FormData();
         formData.append('edition[audio]', recordedBlob)
-
-        axios.post('/api/mail', {audio: audio.src})
+        console.log("recorded Blob: ", recordedBlob);
+        //debugger;
+        axios.post('/api/mail', recordedBlob, {headers: {'Content-Type': 'application/octet-stream'}
+        })
         .then(res => console.log("response from server is: ", res.data))
     });
 };
