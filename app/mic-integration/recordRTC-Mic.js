@@ -31,13 +31,11 @@ stopButton.onclick = function () {
           let encodedData = dataURL.split(',')[1];
           let decodedData = window.atob(encodedData);
           console.log("recorded blob is: ", recordedBlob);
-          console.log("data URL is: ", dataURL);
           console.log("encoded data is: ", encodedData);
           // console.log("decoded data is: ", decodedData);
 
-          axios.post('/api/mail', dataURL)
+          axios.post('/api/mail', encodedData)
           // axios.post('/api/mail', decodedData)
-          // axios.post('/api/mail', encodedData)
           // axios.post('/api/mail', recordedBlob, {headers: {'Content-Type': 'application/octet-stream'}})
           .then(res => console.log("response from server is: ", res.data))
           .catch(err => console.error(err));
