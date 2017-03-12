@@ -17,9 +17,8 @@ function error (err) {
 }
 
 function recording (mediaStream) {
-    recordRTC = RecordRTC(mediaStream, {type: 'audio'});
-    recordRTC.startRecording();
-
+  recordRTC = RecordRTC(mediaStream, {type: 'audio'});
+  recordRTC.startRecording();
 }
 
 stopButton.onclick = function () {
@@ -27,14 +26,21 @@ stopButton.onclick = function () {
         audio.src = audioWebMURL;
         console.log("recordRTC is: ", recordRTC);
 
-        let recordedBlob = recordRTC.getBlob();
-        let formData = new FormData();
-        formData.append('edition[audio]', recordedBlob)
-        console.log("recorded Blob: ", recordedBlob);
-        //debugger;
-        axios.post('/api/mail', recordedBlob, {headers: {'Content-Type': 'application/octet-stream'}
-        })
-        .then(res => console.log("response from server is: ", res.data))
+        recordRTC.getDataURL(function(dataURL){
+          let recordedBlob = recordRTC.getBlob();
+          let encodedData = dataURL.split(',')[1];
+          let decodedData = window.atob(encodedData);
+          console.log(dataURL);
+          // console.log("encoded data is: ", encodedData);
+          // console.log("decoded data is: ", decodedData);
+          console.log("recorded blob is: ", recordedBlob);
+          axios.post('/api/mail', decodedData)
+          .then(res => console.log("response from server is: ", res.data))
+          .catch(err => console.error(err));
+        });
+
+        // axios.post('/api/mail', recordedBlob, {headers: {'Content-Type': 'audio/wav'}})
+        // .then(res => console.log("response from server is: ", res.data))
     });
 };
 
