@@ -1,21 +1,14 @@
 import React from 'react';
+import recordRTCScript from '../mic-integration/recordRTC-Mic.js';
 
 const Record = () => {
-
-  function startClick (event){
-
-  }
-
-  function stopClick (event) {
-
-  }
 
   return (
     <div>
     <audio id="audioNode"> </audio>
 
-    <button onClick={startClick} id="btn-start-recording">Start Recording</button>
-    <button onClick={stopClick} id="btn-stop-recording" disabled="">Stop Recording</button>
+    <button id="btn-start-recording">Start Recording</button>
+    <button id="btn-stop-recording">Stop Recording</button>
 
     </div>
   )

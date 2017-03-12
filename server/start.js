@@ -42,6 +42,7 @@ module.exports = app
   // Body parsing middleware
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
+  .use(bodyParser.raw())
 
   // Authentication middleware
   .use(passport.initialize())

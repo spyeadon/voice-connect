@@ -10,7 +10,8 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import Record from './components/recorder.jsx';
 
-import recordRTCScript from './recordRTC.js';
+// import webAPIScript from './mic-integration/webAPI-Mic.js';
+import recordRTCScript from './mic-integration/recordRTC-Mic.js';
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -21,19 +22,19 @@ const ExampleApp = connect(
         {//user ? <WhoAmI/> : <Login/>}
         }
       </nav>
-      {children}
+      {//children}
+      }
     </div>
 )
 
-render (
+/*render (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
-        <IndexRedirect to="/jokes" />
         <Route path="/jokes" component={Jokes} />
         <Route path="/record" component={Record} />
       </Route>
     </Router>
   </Provider>,
   document.getElementById('main')
-)
+)*/
