@@ -30,17 +30,18 @@ stopButton.onclick = function () {
           let recordedBlob = recordRTC.getBlob();
           let encodedData = dataURL.split(',')[1];
           let decodedData = window.atob(encodedData);
-          console.log(dataURL);
-          // console.log("encoded data is: ", encodedData);
-          // console.log("decoded data is: ", decodedData);
           console.log("recorded blob is: ", recordedBlob);
-          axios.post('/api/mail', decodedData)
+          console.log("data URL is: ", dataURL);
+          console.log("encoded data is: ", encodedData);
+          // console.log("decoded data is: ", decodedData);
+
+          axios.post('/api/mail', dataURL)
+          // axios.post('/api/mail', decodedData)
+          // axios.post('/api/mail', encodedData)
+          // axios.post('/api/mail', recordedBlob, {headers: {'Content-Type': 'application/octet-stream'}})
           .then(res => console.log("response from server is: ", res.data))
           .catch(err => console.error(err));
         });
-
-        // axios.post('/api/mail', recordedBlob, {headers: {'Content-Type': 'audio/wav'}})
-        // .then(res => console.log("response from server is: ", res.data))
     });
 };
 
