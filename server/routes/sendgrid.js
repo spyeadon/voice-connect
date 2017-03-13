@@ -1,45 +1,50 @@
 const helper = require('sendgrid').mail;
 const sg = require('sendgrid')(require('../../sendgrid.json').SENDGRID_API_KEY);
 const fs = require('fs');
+const File = require('file-api').File;
+const FileReader = require('file-api').FileReader;
+var fileReader = new FileReader();
 
 module.exports = require('express').Router()
   .post('/', (req, res, next) => {
 
-  let dataURL = Object.keys(req.body)[0];
-  dataURL = dataURL.split(' ').join('+');
-
-  let encodedData = Object.keys(req.body)[0];
-  encodedData = "data:audio/webm;base64," + encodedData.split(' ').join('+');
-
+  let encodedData = Object.keys(req.body)[0].split(' ').join('+');
   let decodedData = Object.keys(req.body).reduce((accum, element) => {
     return accum + element;
   }, '');
   let decodedDataLength = Object.keys(req.body).length;
-
   let recordRTC = Object.keys(req.body);
+  let blob = req.body;
 
-  console.log("data content is: ", dataURL);
+  console.log("data content is: ", encodedData);
+
+//   var file = new File({
+//   name: "song.weba",
+//   type: "audio/webm",
+//   buffer: new Buffer(decodedData, 'base64')
+// });
+
+//   fileReader.readAsArrayBuffer(file);
+//   fileReader.onload = function (event) {
+//     console.log("file reader result is: ", event.target.result);
+//     fs.writeFileSync('test.weba', event.target.result);
+//   };
 
   let from_email = new helper.Email('spyeadon@gmail.com');
   let to_email = new helper.Email('spyeadon@gmail.com');
   let subject = "SendGrid voice-connect test Close please";
-  // let content = new helper.Content('text/plain', 'test of SG email integration');
 
-  let contentFILE = {buffer: req.body.toString('base64')};
-  // let content = new helper.Content("audio/webm", contentFILE, "file-name.weba");
-  let content = new helper.Content("text/plain", dataURL);
-  // let content = new helper.Content('text/html', `<a href=${dataURL}>Audio recording</a>`);
+  let content = new helper.Content('text/plain', 'test of SG email integration');
 
   let mail = new helper.Mail(from_email, subject, to_email, content);
-  // console.log("mail obj contents: ", mail.getContents()[0].value.buffer);
 
-  // let attachment = new helper.Attachment();
   // var audioAttach = new Buffer(decodedData, 'base64');
-  // attachment.setContent(audioAttach);
+  let attachment = new helper.Attachment();
+  attachment.setContent(encodedData);
   // attachment.setType('audio/webm');
-  // attachment.setFilename('file.weba');
+  attachment.setFilename('audio.wav');
   // attachment.setDisposition('attachment');
-  // mail.addAttachment(attachment);
+  mail.addAttachment(attachment);
 
   const request = sg.emptyRequest({
     method: 'POST',
@@ -58,6 +63,8 @@ module.exports = require('express').Router()
       res.json(request.body);
     });
 })
+
+
 .get('/', (req, res, next) => {
 
   let from_email = new helper.Email('example@sendgrid.net');
