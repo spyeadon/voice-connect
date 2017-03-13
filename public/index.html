@@ -4,40 +4,59 @@
   </head>
   <body>
     <div id=main>
+
+      <div style="width: 25%">
+
       <audio id="audioNode"> </audio>
 
-      <form class='form-group'
-        onSubmit={handleSubmit}
-      >
         <input
-          value={recipient}
-          onChange=handleRecipientChange
-          class='form-control message-to'
-          placeholder="Send to"
-        />
-        <input
-          value='subject'
-          onChange='handleSubjectChange'
+          style="width: 60%"
+          value=''
           class='form-control'
+          id="fromAddress"
+          placeholder="From Email Address"
+        />
+        <br><br>
+        <input
+          style="width: 60%"
+          value=''
+          class='form-control'
+          id="toAddress"
+          placeholder="Recipient Email Address"
+        />
+        <br><br>
+        <input
+          style="width: 100%"
+          value=''
+          class='form-control'
+          id="subjectLine"
           placeholder="Subject line"
         />
+        <br><br>
         <textarea
-          value=''
-          onChange=handleBodyChange
+          style="width: 100%"
+          value='nothing'
           rows="8"
           type="text"
           class='form-control'
-        />
+          id="bodyContent"
+          placeholder="Email Body"
+        ></textarea>
+        <br><br>
+        <button id="btn-start-recording">Start Recording</button>
+        <button id="btn-stop-recording">Stop Recording</button>
+        <br><br><hr><br>
         <button
           type="submit"
-          class="btn btn-success"
-        >
-          Save Message
+          id="submitButton"
+          class="btn btn-success">
+          Submit Message
         </button>
-      </form>
-
-      <button id="btn-start-recording">Start Recording</button>
-      <button id="btn-stop-recording">Stop Recording</button>
+        <br><br>
+        <!-- <div
+        style="padding-top: 10pX; text-align: center; border: 2px solid black; color: white; width: 100%; height: 30px; background-color: red"> All FIELDS REQUIRED
+        </div> -->
+      </div>
 
     </div>
     <script async defer src=/bundle.js></script>
