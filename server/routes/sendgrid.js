@@ -1,5 +1,5 @@
 const helper = require('sendgrid').mail;
-const sg = require('sendgrid')(require('../../sendgrid.json').SENDGRID_API_KEY);
+const sg = require('sendgrid')(require('../../sendgrid.json').SENDGRID_API_KEY_2);
 const fs = require('fs');
 const File = require('file-api').File;
 const FileReader = require('file-api').FileReader;
@@ -21,7 +21,7 @@ module.exports = require('express').Router()
 //   var file = new File({
 //   name: "song.weba",
 //   type: "audio/webm",
-//   buffer: new Buffer(decodedData, 'base64')
+//   buffer: encodedData
 // });
 
 //   fileReader.readAsArrayBuffer(file);
