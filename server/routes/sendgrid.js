@@ -8,15 +8,22 @@ var fileReader = new FileReader();
 module.exports = require('express').Router()
   .post('/', (req, res, next) => {
 
-  let encodedData = Object.keys(req.body)[0].split(' ').join('+');
+  // let encodedData = Object.keys(req.body.data)[0].split(' ').join('+');
+  let encodedData = req.body.data;
   let decodedData = Object.keys(req.body).reduce((accum, element) => {
     return accum + element;
   }, '');
-  let decodedDataLength = Object.keys(req.body).length;
   let recordRTC = Object.keys(req.body);
-  let blob = req.body;
 
-  console.log("data content is: ", encodedData);
+  console.log("data content is: ", req.body.data);
+  console.log("data content from browser length is: ", req.body.length);
+  console.log("data content on server length is: ", encodedData.length);
+  console.log("encoded data = # is: ", encodedData.length % 4);
+  var equals = encodedData.length % 4;
+
+  for(var i=0; i < equals; i++) {
+    encodedData += "=";
+  }
 
 //   var file = new File({
 //   name: "song.weba",
@@ -32,18 +39,14 @@ module.exports = require('express').Router()
 
   let from_email = new helper.Email('spyeadon@gmail.com');
   let to_email = new helper.Email('spyeadon@gmail.com');
-  let subject = "SendGrid voice-connect test Close please";
-
+  let subject = 'SendGrid voice-connect test Close please';
   let content = new helper.Content('text/plain', 'test of SG email integration');
 
   let mail = new helper.Mail(from_email, subject, to_email, content);
 
-  // var audioAttach = new Buffer(decodedData, 'base64');
   let attachment = new helper.Attachment();
   attachment.setContent(encodedData);
-  // attachment.setType('audio/webm');
   attachment.setFilename('audio.wav');
-  // attachment.setDisposition('attachment');
   mail.addAttachment(attachment);
 
   const request = sg.emptyRequest({
