@@ -6,6 +6,36 @@
     <div id=main>
       <audio id="audioNode"> </audio>
 
+      <form class='form-group'
+        onSubmit={handleSubmit}
+      >
+        <input
+          value={recipient}
+          onChange=handleRecipientChange
+          class='form-control message-to'
+          placeholder="Send to"
+        />
+        <input
+          value='subject'
+          onChange='handleSubjectChange'
+          class='form-control'
+          placeholder="Subject line"
+        />
+        <textarea
+          value=''
+          onChange=handleBodyChange
+          rows="8"
+          type="text"
+          class='form-control'
+        />
+        <button
+          type="submit"
+          class="btn btn-success"
+        >
+          Save Message
+        </button>
+      </form>
+
       <button id="btn-start-recording">Start Recording</button>
       <button id="btn-stop-recording">Stop Recording</button>
 
