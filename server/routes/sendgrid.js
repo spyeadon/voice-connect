@@ -13,17 +13,8 @@ module.exports = require('express').Router()
   let decodedData = Object.keys(req.body).reduce((accum, element) => {
     return accum + element;
   }, '');
-  let recordRTC = Object.keys(req.body);
 
   console.log("data content is: ", req.body.data);
-  console.log("data content from browser length is: ", req.body.length);
-  console.log("data content on server length is: ", encodedData.length);
-  console.log("encoded data = # is: ", encodedData.length % 4);
-  var equals = encodedData.length % 4;
-
-  for(var i=0; i < equals; i++) {
-    encodedData += "=";
-  }
 
 //   var file = new File({
 //   name: "song.weba",

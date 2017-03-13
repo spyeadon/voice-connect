@@ -34,8 +34,7 @@ stopButton.onclick = function () {
           console.log("data URL is: ", dataURL);
           console.log("recorded blob is: ", recordedBlob);
           console.log("encoded data is: ", encodedData);
-          console.log("encoded data length is: ", encodedData.length);
-          let length = encodedData.length;
+          console.log("decoded data is: ", decodedData);
 
           axios.post('/api/mail', {data: encodedData, length: length})
           .then(res => console.log("response from server is: ", res.data))
