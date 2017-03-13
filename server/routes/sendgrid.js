@@ -81,7 +81,7 @@ module.exports = require('express').Router()
 
    sg.API(request)
     .then(response => {
-      res.status(200).json(request);
+      res.status(response.statusCode).json(request);
       console.log("res status code: ", response.statusCode)
     })
     .catch(error => {
