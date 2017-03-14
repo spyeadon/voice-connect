@@ -52,7 +52,7 @@ submitButton.onclick = function (event) {
       let encodedBlob = window.btoa(recordedBlob);
       console.log("data URL is: ", dataURL);
       console.log("recorded blob is: ", recordedBlob);
-      console.log("encoded data is: ", encodedData);
+      // console.log("encoded data is: ", encodedData);
       console.log("decoded data is: ", decodedData);
 
       if (toStr && subLStr && bodyStr && fromStr) {
