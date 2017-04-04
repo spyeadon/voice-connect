@@ -1,6 +1,6 @@
 # Voice-Connect
 
-Web app that allows the user to record a voice message, and attach it to an email sent with the subject line, from address, body content, and recipient of your choosing.
+Web app that allows the user to record a voice message, and attach it to an email sent with the subject line, from address, body content, and recipient of your choosing. Run the server using "npm run dev" in the project main directory.
 
 ## Technologies Used
 
