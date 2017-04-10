@@ -14,7 +14,7 @@ module.exports = require('express').Router()
     return accum + element;
   }, '');
 
-  console.log("data content is: ", req.body.data);
+  console.log("request is: ", req.body);
 
 //   var file = new File({
 //   name: "song.weba",
@@ -28,10 +28,15 @@ module.exports = require('express').Router()
 //     fs.writeFileSync('test.weba', event.target.result);
 //   };
 
-  let from_email = new helper.Email('spyeadon@gmail.com');
-  let to_email = new helper.Email('spyeadon@gmail.com');
-  let subject = 'SendGrid voice-connect test Close please';
-  let content = new helper.Content('text/plain', 'test of SG email integration');
+  // let from_email = new helper.Email('spyeadon@gmail.com');
+  // let to_email = new helper.Email('spyeadon@gmail.com');
+  // let subject = 'SendGrid voice-connect test Close please';
+  // let content = new helper.Content('text/plain', 'test of SG email integration');
+
+  let from_email = new helper.Email(req.body.fromAddress);
+  let to_email = new helper.Email(req.body.toAddress);
+  let subject = req.body.subjectLine;
+  let content = new helper.Content('text/plain', req.body.bodyContent);
 
   let mail = new helper.Mail(from_email, subject, to_email, content);
 
