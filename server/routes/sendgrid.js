@@ -8,30 +8,12 @@ var fileReader = new FileReader();
 module.exports = require('express').Router()
   .post('/', (req, res, next) => {
 
-  // let encodedData = Object.keys(req.body.data)[0].split(' ').join('+');
   let encodedData = req.body.data;
   let decodedData = Object.keys(req.body).reduce((accum, element) => {
     return accum + element;
   }, '');
 
-  console.log("request is: ", req.body);
-
-//   var file = new File({
-//   name: "song.weba",
-//   type: "audio/webm",
-//   buffer: encodedData
-// });
-
-//   fileReader.readAsArrayBuffer(file);
-//   fileReader.onload = function (event) {
-//     console.log("file reader result is: ", event.target.result);
-//     fs.writeFileSync('test.weba', event.target.result);
-//   };
-
-  // let from_email = new helper.Email('spyeadon@gmail.com');
-  // let to_email = new helper.Email('spyeadon@gmail.com');
-  // let subject = 'SendGrid voice-connect test Close please';
-  // let content = new helper.Content('text/plain', 'test of SG email integration');
+  // console.log("request is: ", req.body);
 
   let from_email = new helper.Email(req.body.fromAddress);
   let to_email = new helper.Email(req.body.toAddress);

@@ -10,7 +10,6 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import Record from './components/recorder.jsx';
 
-// import webAPIScript from './mic-integration/webAPI-Mic.js';
 import recordRTCScript from './mic-integration/recordRTC-Mic.js';
 
 const ExampleApp = connect(

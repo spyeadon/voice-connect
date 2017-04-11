@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const startButton = document.getElementById('btn-start-recording');
 const stopButton = document.getElementById('btn-stop-recording');
-const audio = document.getElementById('audioNode');
+// const audio = document.getElementById('audioNode');
 const submitButton = document.getElementById('submitButton');
 const fromAddress = document.getElementById('fromAddress');
 const toAddress = document.getElementById('toAddress');
@@ -27,10 +27,7 @@ function recording (mediaStream) {
 }
 
 stopButton.onclick = function () {
-    recordRTC.stopRecording(function (audioWebMURL) {
-        audio.src = audioWebMURL;
-        console.log("audio src is: ", audio.src);
-    });
+    recordRTC.stopRecording(function () {});
 };
 
 startButton.onclick = function () {
@@ -49,11 +46,10 @@ submitButton.onclick = function (event) {
       let recordedBlob = recordRTC.getBlob();
       let encodedData = dataURL.split(',')[1];
       let decodedData = window.atob(encodedData);
-      let encodedBlob = window.btoa(recordedBlob);
-      console.log("data URL is: ", dataURL);
-      console.log("recorded blob is: ", recordedBlob);
+      // console.log("data URL is: ", dataURL);
+      // console.log("recorded blob is: ", recordedBlob);
       // console.log("encoded data is: ", encodedData);
-      console.log("decoded data is: ", decodedData);
+      // console.log("decoded data is: ", decodedData);
 
       if (toStr && subLStr && bodyStr && fromStr) {
         axios.post('/api/mail', {data: encodedData, fromAddress: fromStr, toAddress: toStr, subjectLine: subLStr, bodyContent: bodyStr })
