@@ -1,0 +1,10 @@
+/*CSS Custom Stylesheet*/
+
+#message-container {
+  display: flex;
+  flex-direction: column;
+}
+
+input.form-control{
+  height: 100%;
+}

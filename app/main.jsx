@@ -7,9 +7,9 @@ import {connect, Provider} from 'react-redux'
 import store from './store'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
-import RecordContainer from './components/record-container.jsx';
+import MessagePreContainer from './components/Message-container.jsx';
 
-import recordRTCScript from './mic-integration/recordRTC-Mic.js';
+// import recordRTCScript from './mic-integration/recordRTC-Mic.js';
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -20,7 +20,7 @@ const ExampleApp = connect(
         {user ? <WhoAmI/> : <Login/>}
       </nav>
     {/*children*/}
-    <Record />
+    <MessagePreContainer />
     </div>
 )
 
@@ -28,7 +28,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
-        <Route path="/record" component={RecordContainer} />
+        <Route path="/record" component={MessagePreContainer} />
       </Route>
     </Router>
   </Provider>,
