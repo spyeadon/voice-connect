@@ -6,35 +6,37 @@ const Message = (props) => {
     <div id="message-container">
 
       {/*<audio id="audioNode" />*/}
-      <form>
+      <form className='form-group' >
         <input
-          value=''
+          value={props.fromAddress}
+          onChange={props.fromAddressChange}
           className='form-control'
           id="fromAddress"
           placeholder="From Email Address"
         />
         <input
-          value=''
+          value={props.toAddress}
+          onChange={props.toAddressChange}
           className='form-control'
           id="toAddress"
           placeholder="Recipient Email Address"
         />
         <input
-          value=''
+          value={props.subjectLine}
+          onChange={props.subjectLineChange}
           className='form-control'
           id="subjectLine"
           placeholder="Subject line"
         />
         <textarea
-          value=''
+          value={props.bodyContent}
+          onChange={props.bodyContentChange}
           rows="8"
           type="text"
           className='form-control'
           id="bodyContent"
           placeholder="Email Body"
         />
-        <button id="btn-start-recording">Start Recording</button>
-        <button id="btn-stop-recording">Stop Recording</button>
         <button
           type="submit"
           id="submitButton"
