@@ -5,6 +5,17 @@ import Message from './Message.jsx';
 class MessageContainer extends React.Component {
   constructor(props){
     super();
+    this.state = {
+      fromAddress: '',
+      toAddress: '',
+      subjectLine: '',
+      bodyContent: ''
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit (evt) {
+
   }
 
   render(){

@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Message = () => {
+const Message = (props) => {
 
   return (
     <div id="message-container">
 
-      <audio id="audioNode"> </audio>
-
+      {/*<audio id="audioNode" />*/}
+      <form>
         <input
           value=''
           className='form-control'
@@ -41,6 +41,7 @@ const Message = () => {
           className="btn btn-success">
           Submit Message
         </button>
+      </form>
 
       </div>
   )
