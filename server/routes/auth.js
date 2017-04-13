@@ -122,7 +122,7 @@ passport.use(new (require('passport-local').Strategy) (
 auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
-auth.post('/login/local', passport.authenticate('local', { successRedirect: '/', }))
+auth.post('/login/local', passport.authenticate('local', { successRedirect: '/' }))
 
 // GET requests for OAuth login:
 // Register this route as a callback URL with OAuth provider
@@ -135,6 +135,7 @@ auth.get('/login/:strategy', (req, res, next) =>
 )
 
 auth.post('/logout', (req, res, next) => {
+  console.log("request session before logout was: ", req.session);
   req.logout()
   res.redirect('/api/auth/whoami')
 })
