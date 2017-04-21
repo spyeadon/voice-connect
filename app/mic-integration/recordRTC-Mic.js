@@ -63,7 +63,7 @@ submitButton.onclick = function (event) {
         .catch(err => console.error(err));
       }
       else {
-        console.log('try again');
+        console.log('try again')
       }
     });
 
