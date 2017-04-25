@@ -2,16 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Message from './Message.jsx';
 import store from '../store.jsx';
+import {submitMessage} from '../action-creators/message.jsx';
 
 class MessageContainer extends React.Component {
   constructor(props){
     super();
-    this.state = Object.assign({
+    this.state = {
       fromAddress: '',
       toAddress: '',
       subjectLine: '',
       bodyContent: ''
-    }, store.getState());
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fromAddressChange = this.fromAddressChange.bind(this);
     this.toAddressChange = this.toAddressChange.bind(this);
@@ -20,10 +21,13 @@ class MessageContainer extends React.Component {
   }
 
   handleSubmit (evt) {
+    evt.preventDefault();
     const fromAddress = this.state.fromAddress;
     const toAddress = this.state.toAddress;
     const subjectLine = this.state.subjectLine;
     const bodyContent = this.state.bodyContent;
+    let message = {fromAddress, toAddress, subjectLine, bodyContent}
+    this.props.sendEmail(message);
   }
 
   fromAddressChange(evt) {
@@ -68,22 +72,16 @@ class MessageContainer extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
-  return {
-
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitMessage(messageText){
-      // dispatch(sendEmail(messageText));
+    sendEmail(message){
+      submitMessage(message);
     }
   }
 }
 
 const MessagePreContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
   )(MessageContainer);
 

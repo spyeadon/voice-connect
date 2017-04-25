@@ -1,3 +1,5 @@
+import {SEND_EMAIL} from '../action-creators/message.jsx';
+
 const initialState = {
   messageTxt: {}
 }

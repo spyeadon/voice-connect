@@ -6,7 +6,10 @@ const Message = (props) => {
     <div id="message-container">
 
       {/*<audio id="audioNode" />*/}
-      <form className='form-group' >
+      <form
+        className='form-group'
+        onSubmit={props.handleSubmit}
+      >
         <input
           value={props.fromAddress}
           onChange={props.fromAddressChange}

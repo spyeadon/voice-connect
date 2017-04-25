@@ -13,8 +13,6 @@ module.exports = require('express').Router()
     return accum + element;
   }, '');
 
-  // console.log("request is: ", req.body);
-
   let from_email = new helper.Email(req.body.fromAddress);
   let to_email = new helper.Email(req.body.toAddress);
   let subject = req.body.subjectLine;
@@ -46,12 +44,14 @@ module.exports = require('express').Router()
 })
 
 
-.get('/', (req, res, next) => {
+.post('/test', (req, res, next) => {
 
-  let from_email = new helper.Email('example@sendgrid.net');
-  let to_email = new helper.Email('spyeadon@gmail.com');
-  let subject = "SendGrid voice-connect test email";
-  let content = new helper.Content("text/plain", "Test of audio file attachment");
+  console.log("req body is: ", req.body);
+
+  let from_email = new helper.Email(req.body.message.fromAddress);
+  let to_email = new helper.Email(req.body.message.toAddress);
+  let subject = req.body.message.subjectLine;
+  let content = new helper.Content('text/plain', req.body.message.bodyContent);
   let mail = new helper.Mail(from_email, subject, to_email, content);
 
   const request = sg.emptyRequest({
@@ -66,6 +66,6 @@ module.exports = require('express').Router()
       console.log("res status code: ", response.statusCode)
     })
     .catch(error => {
-      console.log("Hey Soren! API err is: ", error.response.statusCode);
+      console.log("Hey Soren! SG err is: ", error.response.statusCode);
     });
 })
