@@ -10,16 +10,13 @@ import WhoAmI from './components/WhoAmI'
 import MessagePreContainer from './components/Message-container.jsx';
 import RecordContainer from './components/Record-container.jsx';
 
-// import recordRTCScript from './mic-integration/recordRTC-Mic.js';
-
-const ExampleApp = connect(
+const AppContainer = connect(
   ({ auth }) => ({ user: auth })
-) (
-  ({ user, children }) =>
+)(
+  ({ user }) =>
   <div id="app">
     <nav>{user ? <WhoAmI /> : <Login />}</nav>
     <div id="main-components">
-    {/*children*/}
     <MessagePreContainer />
     <RecordContainer />
     </div>
@@ -29,10 +26,7 @@ const ExampleApp = connect(
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={ExampleApp}>
-        <Route path="/message" component={MessagePreContainer} />
-        <Route path="/record" component={RecordContainer} />
-      </Route>
+      <Route path="/" component={AppContainer} />
     </Router>
   </Provider>,
   document.getElementById('main')

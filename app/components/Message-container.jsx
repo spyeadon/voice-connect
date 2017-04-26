@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Message from './Message.jsx';
-import store from '../store.jsx';
 import {submitMessage} from '../action-creators/message.jsx';
 
 class MessageContainer extends React.Component {
@@ -28,6 +27,12 @@ class MessageContainer extends React.Component {
     const bodyContent = this.state.bodyContent;
     let message = {fromAddress, toAddress, subjectLine, bodyContent}
     this.props.sendEmail(message);
+    this.setState({
+      fromAddress: '',
+      toAddress: '',
+      subjectLine: '',
+      bodyContent: ''
+    })
   }
 
   fromAddressChange(evt) {
@@ -75,7 +80,7 @@ class MessageContainer extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     sendEmail(message){
-      submitMessage(message);
+      dispatch(submitMessage(message));
     }
   }
 }
