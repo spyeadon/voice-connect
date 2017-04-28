@@ -1,18 +1,10 @@
 const helper = require('sendgrid').mail;
 const sg = require('sendgrid')(require('../../sendgrid.json').SENDGRID_API_KEY_2);
-const fs = require('fs');
-const File = require('file-api').File;
-const FileReader = require('file-api').FileReader;
-var fileReader = new FileReader();
 
 module.exports = require('express').Router()
   .post('/', (req, res, next) => {
 
   let encodedData = req.body.data;
-  let decodedData = Object.keys(req.body).reduce((accum, element) => {
-    return accum + element;
-  }, '');
-
   let from_email = new helper.Email(req.body.fromAddress);
   let to_email = new helper.Email(req.body.toAddress);
   let subject = req.body.subjectLine;
@@ -45,9 +37,7 @@ module.exports = require('express').Router()
 
 
 .post('/test', (req, res, next) => {
-
-  console.log("req body is: ", req.body);
-
+  //test route of sendgrid server/browser integration without any audio
   let from_email = new helper.Email(req.body.message.fromAddress);
   let to_email = new helper.Email(req.body.message.toAddress);
   let subject = req.body.message.subjectLine;

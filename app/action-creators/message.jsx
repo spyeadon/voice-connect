@@ -11,5 +11,17 @@ export const emailMessage = (message) => {
 export const submitMessage = (message) =>
   dispatch =>
     axios.post('/api/mail/test', {message: message})
-    .then(res => console.log(res))
+    .then(res => {
+      dispatch(emailMessage(res.data))
+      console.log(res)
+    })
+    .catch(err => console.error(err))
+
+export const submitMsgWithAudio = (message) =>
+  dispatch =>
+    axios.post('/api/mail', {message: message})
+    .then(res => {
+      dispatch(emailMessage(res.data))
+      console.log(res)
+    })
     .catch(err => console.error(err))

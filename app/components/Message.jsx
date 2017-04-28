@@ -5,7 +5,6 @@ const Message = (props) => {
   return (
     <div id="message-container">
 
-      {/*<audio id="audioNode" />*/}
       <form
         className='form-group'
         onSubmit={props.handleSubmit}
