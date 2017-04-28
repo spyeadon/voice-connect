@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/queerviolet/bones#readme",
   "dependencies": {
-    "axios": "^0.15.2",
+    "axios": "^0.15.3",
     "babel-preset-stage-2": "^6.18.0",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
@@ -63,7 +63,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
     "recordrtc": "^5.4.1",
-    "recordrtc-nodejs": "^1.0.1",
+    "recordrtc-nodejs": "^1.0.6",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0",
     "redux-logger": "^2.7.0",
@@ -71,7 +71,8 @@
     "sendgrid": "^4.7.1",
     "sequelize": "^3.24.6",
     "sinon": "^1.17.6",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "tone": "^0.10.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",

@@ -1,22 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Record from './Record.jsx';
-const Pizzicato = require('pizzicato');
+const Tone = require('Tone');
 
 class RecordMidContainer extends React.Component {
   constructor(props){
-    super()
+    super();
     this.startRecording = this.startRecording.bind(this);
   }
 
   startRecording(event) {
-    console.log('Pizzicato instance is: ', Pizzicato);
+    event.preventDefault();
+
+    const mic = new Tone.UserMedia();
+    mic.open().then( function() {
+      console.log("mic Tone instance is: ", mic)
+      // mic.start();
+    })
   }
 
   render() {
     return (
       <Record
-      startRecording={this.startRecording}
+        startRecording={this.startRecording}
       />
     )
   }

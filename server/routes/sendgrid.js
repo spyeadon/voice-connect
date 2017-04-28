@@ -37,7 +37,7 @@ module.exports = require('express').Router()
 
 
 .post('/test', (req, res, next) => {
-
+  //test route of sendgrid server/browser integration without any audio
   let from_email = new helper.Email(req.body.message.fromAddress);
   let to_email = new helper.Email(req.body.message.toAddress);
   let subject = req.body.message.subjectLine;

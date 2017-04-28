@@ -4,15 +4,15 @@ const Record = (props) => {
 
   return (
     <div id="record-container">
-      {/*<audio id="audioNode" />*/}
+      <audio id="audioNode" />
       <button
         onClick={props.startRecording}
-        id="btn-start-recording">
-        Start Recording
+        id="btn-start-recording"
+        >Start Recording
       </button>
       <button
-        id="btn-stop-recording">
-        Stop Recording
+        id="btn-stop-recording"
+        >Stop Recording
       </button>
 
       <span>Available Tones</span>
