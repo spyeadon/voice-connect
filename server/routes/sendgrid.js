@@ -4,11 +4,11 @@ const sg = require('sendgrid')(require('../../sendgrid.json').SENDGRID_API_KEY_2
 module.exports = require('express').Router()
   .post('/', (req, res, next) => {
 
-  let encodedData = req.body.data;
-  let from_email = new helper.Email(req.body.fromAddress);
-  let to_email = new helper.Email(req.body.toAddress);
-  let subject = req.body.subjectLine;
-  let content = new helper.Content('text/plain', req.body.bodyContent);
+  let encodedData = req.body.message.data;
+  let from_email = new helper.Email(req.body.message.fromAddress);
+  let to_email = new helper.Email(req.body.message.toAddress);
+  let subject = req.body.message.subjectLine;
+  let content = new helper.Content('text/plain', req.body.message.bodyContent);
 
   let mail = new helper.Mail(from_email, subject, to_email, content);
 

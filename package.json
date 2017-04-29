@@ -39,6 +39,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "babel-preset-stage-2": "^6.18.0",
+    "base64-js": "^1.2.0",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
     "chai-enzyme": "^0.5.2",

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Message from './Message.jsx';
-import {submitMessage} from '../action-creators/message.jsx';
+import {submitMessage, submitMsgWithAudio} from '../action-creators/message.jsx';
 
 class MessageContainer extends React.Component {
   constructor(props){
@@ -17,16 +17,24 @@ class MessageContainer extends React.Component {
     this.toAddressChange = this.toAddressChange.bind(this);
     this.subjectLineChange = this.subjectLineChange.bind(this);
     this.bodyContentChange = this.bodyContentChange.bind(this);
+    this.audioToBase64 = this.audioToBase64.bind(this);
+  }
+
+  audioToBase64 (dataURL) {
+    this.message.data =  dataURL.split(',')[1];
+    this.props.sendEmailWithAudio(this.message);
   }
 
   handleSubmit (evt) {
     evt.preventDefault();
+    const recordRTC = this.props.recordRTC;
     const fromAddress = this.state.fromAddress;
     const toAddress = this.state.toAddress;
     const subjectLine = this.state.subjectLine;
     const bodyContent = this.state.bodyContent;
-    let message = {fromAddress, toAddress, subjectLine, bodyContent}
-    this.props.sendEmail(message);
+    this.message = {fromAddress, toAddress, subjectLine, bodyContent}
+    if (recordRTC) recordRTC.getDataURL(this.audioToBase64);
+    else this.props.sendEmailNoAudio(this.message);
     this.setState({
       fromAddress: '',
       toAddress: '',
@@ -76,17 +84,25 @@ class MessageContainer extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    recordRTC: state.message.recordRTC
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sendEmail(message){
+    sendEmailWithAudio(message){
+      dispatch(submitMsgWithAudio(message));
+    },
+    sendEmailNoAudio(message) {
       dispatch(submitMessage(message));
     }
   }
 }
 
 const MessagePreContainer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
   )(MessageContainer);
 

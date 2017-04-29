@@ -47,10 +47,6 @@ submitButton.onclick = function (event) {
       let encodedData = dataURL.split(',')[1];
       let decodedData = window.atob(encodedData);
 
-      // console.log("data URL is: ", dataURL);
-      // console.log("recorded blob is: ", recordedBlob);
-      // console.log("encoded data is: ", encodedData);
-      // console.log("decoded data is: ", decodedData);
 
       if (toStr && subLStr && bodyStr && fromStr) {
         axios.post('/api/mail', {data: encodedData, fromAddress: fromStr, toAddress: toStr, subjectLine: subLStr, bodyContent: bodyStr })
