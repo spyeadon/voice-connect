@@ -12,6 +12,7 @@ const Record = (props) => {
       </button>
       <button
         id="btn-stop-recording"
+        onClick={props.stopRecording}
         >Stop Recording
       </button>
 

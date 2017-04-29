@@ -25,3 +25,11 @@ export const submitMsgWithAudio = (message) =>
       console.log(res)
     })
     .catch(err => console.error(err))
+
+export const GET_RECORDING = 'GET_RECORDING';
+export const getRecording = (recordRTC) => {
+  return {
+    type: GET_RECORDING,
+    recordRTC: recordRTC
+  }
+}

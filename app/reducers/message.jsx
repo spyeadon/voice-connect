@@ -1,14 +1,21 @@
-import {SEND_EMAIL} from '../action-creators/message.jsx';
+import {SEND_EMAIL, GET_RECORDING} from '../action-creators/message.jsx';
 
 const initialState = {
-  messageTxt: {}
+  messageTxt: {},
+  recordRTC: {}
 }
 
 const message = (state = initialState, action) => {
   const newState = Object.assign({}, state);
 
-  switch(action.type){
+  switch (action.type){
+    case GET_RECORDING:
+      newState.recordRTC = action.recordRTC;
+      return newState;
+
     default:
       return state;
   }
 }
+
+export default message;
