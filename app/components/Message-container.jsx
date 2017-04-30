@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Message from './Message.jsx';
 import {submitMessage, submitMsgWithAudio} from '../action-creators/message.jsx';
+import {toneBufferToB64} from '../audioUtils/userRecord.jsx';
 
 class MessageContainer extends React.Component {
   constructor(props){
@@ -15,26 +16,26 @@ class MessageContainer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fromAddressChange = this.fromAddressChange.bind(this);
     this.toAddressChange = this.toAddressChange.bind(this);
-    this.subjectLineChange = this.subjectLineChange.bind(this);
     this.bodyContentChange = this.bodyContentChange.bind(this);
-    this.audioToBase64 = this.audioToBase64.bind(this);
-  }
-
-  audioToBase64 (dataURL) {
-    this.message.data =  dataURL.split(',')[1];
-    this.props.sendEmailWithAudio(this.message);
+    this.subjectLineChange = this.subjectLineChange.bind(this);
   }
 
   handleSubmit (evt) {
     evt.preventDefault();
-    const recordRTC = this.props.recordRTC;
+    const toneBuff = this.props.toneBuff;
     const fromAddress = this.state.fromAddress;
     const toAddress = this.state.toAddress;
     const subjectLine = this.state.subjectLine;
     const bodyContent = this.state.bodyContent;
     this.message = {fromAddress, toAddress, subjectLine, bodyContent}
-    if (recordRTC) recordRTC.getDataURL(this.audioToBase64);
-    else this.props.sendEmailNoAudio(this.message);
+    if (toneBuff) {
+      console.log('should be tone buffer: ', toneBuff);
+      this.message.data = toneBufferToB64(toneBuff);
+      this.props.sendEmailWithAudio(this.message);
+    }
+    else {
+      this.props.sendEmailNoAudio(this.message);
+    }
     this.setState({
       fromAddress: '',
       toAddress: '',
@@ -86,7 +87,7 @@ class MessageContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    recordRTC: state.message.recordRTC
+    toneBuff: state.message.recordRTC
   }
 }
 

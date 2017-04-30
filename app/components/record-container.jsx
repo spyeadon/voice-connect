@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Record from './record.jsx';
-const RecordRTC = require('recordrtc');
-const b64 = require('base64-js');
-import {recording, error, session, endRecording} from '../mic-integration/userRecord.jsx';
-import {getRecording} from '../action-creators/message.jsx';
+const Tone = require('Tone');
+import {recording, error, session, endRecording, b64toToneBuffer} from '../audioUtils/userRecord.jsx';
+import {getRecording, submitMsgWithAudio} from '../action-creators/message.jsx';
 
 class RecordMidContainer extends React.Component {
   constructor(props){
     super();
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
+    this.audioTypeConverter = this.audioTypeConverter.bind(this);
   }
 
   startRecording (event) {
@@ -23,7 +23,14 @@ class RecordMidContainer extends React.Component {
   stopRecording (event) {
     event.preventDefault();
     endRecording(this);
-    this.props.mapRtcToState(this.recordRTC);
+    this.recordRTC.getDataURL(this.audioTypeConverter);
+  }
+
+  audioTypeConverter (dataURL) {
+    this.encodedStr =  dataURL.split(',')[1];
+    this.toneBuff = b64toToneBuffer(this.encodedStr);
+    console.log('tone buffer is: ', this.toneBuff);
+    this.props.mapAudToState(this.toneBuff);
   }
 
   render() {
@@ -39,8 +46,11 @@ class RecordMidContainer extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    mapRtcToState (recordRTC) {
+    mapAudToState (recordRTC) {
       dispatch(getRecording(recordRTC))
+    },
+    sendEmailWithAudio(message){
+      dispatch(submitMsgWithAudio(message));
     }
   }
 }
